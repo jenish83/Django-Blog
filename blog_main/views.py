@@ -3,7 +3,8 @@ from app.models import Category,Blog
 
 def home(request):
     categories = Category.objects.all()
-    featured_posts = Blog.objects.filter(is_featured=True , status=1).order_by('updated_at')
+    featured_posts = Blog.objects.filter(is_featured=True , status=1).order_by('-updated_at')
+
     posts = Blog.objects.filter(is_featured=False,status=1)
     
     context = {

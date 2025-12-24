@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404 - Page Not Found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts similar to your site -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top blog title like your homepage */
+        .site-header {
+            padding: 25px 50px;
+            font-size: 36px;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #000;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Main container */
+        .error-wrapper {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .error-code {
+            font-size: 140px;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .error-msg {
+            font-size: 22px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .error-desc {
+            font-size: 16px;
+            color: #666;
+            max-width: 550px;
+            margin: 0 auto 30px auto;
+        }
+
+        .btn-custom {
+            background-color: #f0ad4e;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 5px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #ec971f;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-wrapper">
+        <div class="error-code">404</div>
+
+        <div class="error-msg">Oops! Page not found</div>
+
+        <p class="error-desc">
+            The page you are trying to access may have been removed, renamed, or is temporarily unavailable.
+        </p>
+
+        <a href="{% url 'home' %}" class="btn-custom">Go Back Home</a>
+    </div>
+
+</body>
+</html>
