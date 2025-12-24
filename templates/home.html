@@ -1,48 +1,6 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django Blog</title>
+{% extends "base.html" %}
 
-    <!-- Bootstrap -->
-    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
-</head>
-
-<body>
-
-<div class="container">
-
-    <!-- HEADER -->
-    <header class="blog-header py-3">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <a class="blog-header-logo text-dark" href="/">Django Blog</a>
-            </div>
-            <div class="col-md-4 text-right">
-                <a class="btn btn-sm btn-warning" href="#">Login</a>
-                <a class="btn btn-sm btn-outline-secondary ml-2" href="#">Register</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- NAVBAR -->
-    <div class="nav-scroller py-1 mb-4 border-bottom">
-        <nav class="nav d-flex justify-content-between">
-            {% for cat in categories %}
-                <a class="p-2 text-muted" href="#">{{ cat.category_name }}</a>
-            {% endfor %}
-        </nav>
-    </div>
-
+{% block content %}
     <!-- HERO / FEATURED IMAGE -->
     {% for post in featured_posts %}
         {% if forloop.first %}
@@ -138,13 +96,5 @@
     </div>
 
 </div>
+{% endblock %}
 
-<!-- FOOTER -->
-<footer class="blog-footer text-center py-4 mt-5 border-top">
-    <p>
-        Django blog built with ❤️ by <a href="#">Jenish Panchasara</a>
-    </p>
-</footer>
-
-</body>
-</html>
