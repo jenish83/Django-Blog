@@ -23,8 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-hd82-h+06g5m+o-4ob97u_#b5t^a1d@$%*kh@4u9)f-h_091zr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+DEBUG = True
+    
 ALLOWED_HOSTS = ['*']
 
 
@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'app',
+    'assignment',
+    'crispy_forms',
+    'crispy_bootstrap4',
     
 ]
 
@@ -64,6 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.context_processors.get_categories',
+                'app.context_processors.get_social_links',
             ],
         },
     },
@@ -126,3 +131,5 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

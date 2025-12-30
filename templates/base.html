@@ -1,62 +1,109 @@
-<!-- Header Part-->
-
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Django Blog</title>
 
-    <!-- Bootstrap -->
-    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap 4 -->
+    <link
+      href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900"
+      rel="stylesheet"
+    />
 
     <!-- Custom CSS -->
-    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
-</head>
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
+  </head>
 
-<body>
+  <body>
 
-<div class="container">
+    <!-- MAIN CONTAINER -->
+    <div class="container-fluid px-5">
 
-    <!-- HEADER -->
-    <header class="blog-header py-3">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <a class="blog-header-logo text-dark" href="/">Django Blog</a>
-            </div>
-            <div class="col-md-4 text-right">
-                <a class="btn btn-sm btn-warning" href="#">Login</a>
-                <a class="btn btn-sm btn-outline-secondary ml-2" href="#">Register</a>
-            </div>
-        </div>
-    </header>
+      <!-- HEADER -->
+      <header class="blog-header px-3 py-3 border-bottom bg-white">
+        <div class="row align-items-center no-gutters">
 
-    <!-- NAVBAR -->
-    <div class="nav-scroller py-1 mb-4 border-bottom">
+          <!-- Logo -->
+          <div class="col-md-3">
+            <a class="blog-header-logo text-dark font-weight-bold" href="/">
+              BlogVerse
+            </a>
+          </div>
+
+          <!-- Search -->
+          <div class="col-md-5">
+            <form action="{% url 'search' %}" method="GET">
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  type="text"
+                  name="keyword"
+                  placeholder="Enter search term..."
+                  value = {{ keyword }}
+                >
+                <div class="input-group-append">
+                  <button class="btn btn-warning" type="submit">Go!</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Auth Buttons -->
+          <div class="col-md-4 text-right">
+            {% if user.is_authenticated %}
+              <span class="mr-2">
+                👋 Hello, <strong>{{ user.username }}</strong>
+              </span>
+              <a class="btn btn-sm btn-outline-danger" href="{% url 'logout' %}">
+                Logout
+              </a>
+            {% else %}
+              <a class="btn btn-sm btn-warning" href="{% url 'login' %}">Login</a>
+              <a class="btn btn-sm btn-outline-secondary ml-2" href="{% url 'register' %}">
+                Register
+              </a>
+            {% endif %}
+          </div>
+
+      
+      </header>
+
+      <!-- CATEGORY NAVBAR -->
+      <div class="nav-scroller px-3 py-2 mb-4 border-bottom">
         <nav class="nav d-flex justify-content-between">
-            {% for cat in categories %}
-                <a class="p-2 text-muted" href="#">{{ cat.category_name }}</a>
-            {% endfor %}
+          {% for cat in categories %}
+            <a
+              class="p-2 text-muted"
+              href="{% url 'posts_by_category' cat.id %}"
+            >
+              {{ cat.category_name }}
+            </a>
+          {% endfor %}
         </nav>
+      </div>
+
+      <!-- MAIN CONTEN -->
+      {% block content %}
+      {% endblock %}
+
+      <!-- FOOTER -->
+      <footer class="blog-footer text-center py-4 mt-5 border-top">
+        <p class="mb-0">
+          Django blog built with ❤️ by
+          <a href="#">Jenish Panchasara</a>
+        </p>
+      </footer>
+
     </div>
 
-
-<!-- Main content Part-->
-
-{% block content %}
-{% endblock %}
-
-
-<!-- Footer Part-->
-
-<footer class="blog-footer text-center py-4 mt-5 border-top">
-    <p>
-        Django blog built with ❤️ by <a href="#">Jenish Panchasara</a>
-    </p>
-</footer>
+  </body>
+</html>

@@ -4,7 +4,8 @@
     <!-- HERO / FEATURED IMAGE -->
     {% for post in featured_posts %}
         {% if forloop.first %}
-        <div class="jumbotron hero text-white rounded"
+        <div class="px-4">
+            <div class="jumbotron hero text-white rounded px-5"
              style="background-image: url('{{ post.featured_image.url }}');">
             <div class="col-md-8 px-0">
                 <h1 class="display-4 font-italic">{{ post.title }}</h1>
@@ -12,27 +13,31 @@
                     {{ post.short_description|truncatewords:10 }}
                 </p>
                 <p class="lead mb-0">
-                    <a href="#" class="text-white font-weight-bold">
+                    <a href="{% url 'blogs' post.slug %}" class="text-white font-weight-bold">
                         Continue reading...
                     </a>
                 </p>
             </div>
         </div>
+        </div>
+        
         {% endif %}
     {% endfor %}
 
     <!-- FEATURED POSTS -->
-    <h3 class="text-uppercase text-warning mb-4" style="letter-spacing:2px;">
-        Featured Post
+    <hr>
+    <h3 class="text-uppercase mb-4 px-4 featured-title">
+        -> Featured Post
     </h3>
+    <hr>
 
-    <div class="row mb-4">
+    <div class="row mb-4 px-5">
         {% for post in featured_posts %}
             {% if not forloop.first %}
             <div class="col-md-6 mb-3">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body">
-                        <h4>{{ post.title }}</h4>
+                        <h4><a class="text-dark" href="{% url 'blogs' post.slug %}">{{ post.title }}</a></h4>
                         <small class="text-muted">
                             {{ post.created_at|timesince }} ago | {{ post.author }}
                         </small>
@@ -46,12 +51,13 @@
         {% endfor %}
     </div>
 
+    <hr>
     <!-- RECENT ARTICLES -->
-    <h3 class="text-uppercase text-warning mb-4" style="letter-spacing:2px;">
-        Recent Articles
+    <h3 class="text-uppercase mb-4 px-4 featured-title">
+        -> Recent Article
     </h3>
-
-    <div class="row">
+    <hr>
+    <div class="row px-5">
 
         <!-- POSTS -->
         <div class="col-md-8">
@@ -60,7 +66,7 @@
                 <div class="col-md-6 mb-4">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-body">
-                            <h5>{{ post.title }}</h5>
+                            <h5><a class="text-dark" href="{% url 'blogs' post.slug %}">{{ post.title }}</a></h5>
                             <small class="text-muted">
                                 {{ post.created_at|timesince }} ago | {{ post.author }}
                             </small>
@@ -77,20 +83,23 @@
         <!-- SIDEBAR -->
         <aside class="col-md-4">
             <div class="p-3 mb-3 bg-light rounded">
-                <h4 class="font-italic">About</h4>
+                <h4 class="font-italic">{{ about.about_heading }}</h4>
                 <p class="mb-0">
-                    A clean Django blog project with categories,
-                    featured posts, and modern UI.
+                    {{about.about_description}}
                 </p>
             </div>
 
+
+            {% if social_links %}
             <div class="p-3">
                 <h4 class="font-italic">Follow Us</h4>
                 <ol class="list-unstyled">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">LinkedIn</a></li>
+                    {% for i in social_links %}
+                    <li><a target= "_blank" href="{{ i.link }}">{{ i.platform }}</a></li>
+                    {% endfor %}
                 </ol>
             </div>
+            {% endif %}
         </aside>
 
     </div>

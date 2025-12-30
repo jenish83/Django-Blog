@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>500 - Server Error</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts (matching your homepage) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .site-header {
+            padding: 25px 50px;
+            font-size: 36px;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #000;
+            border-bottom: 1px solid #eee;
+        }
+
+        .error-wrapper {
+            text-align: center;
+            padding: 110px 20px;
+        }
+
+        .error-code {
+            font-size: 140px;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .error-msg {
+            font-size: 25px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .error-desc {
+            font-size: 16px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 35px auto;
+        }
+
+        .btn-custom {
+            background-color: #f0ad4e;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 5px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #ec971f;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-wrapper">
+
+        <div class="error-code">500</div>
+
+        <div class="error-msg">Server Error</div>
+
+        <p class="error-desc">
+            Something went wrong on our end.  
+            Our team has been notified, and we are working to fix the issue.  
+            Please try again later.
+        </p>
+
+        <a href="{% url 'home' %}" class="btn-custom">Go Back Home</a>
+    </div>
+
+</body>
+</html>
