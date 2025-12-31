@@ -3,8 +3,8 @@ from assignment.models import SocialLinks
 
 
 def get_categories(request):
-    categories = Category.objects.all()  
-    return dict(categories=categories)  
+    categories = Category.objects.all().order_by('-created_at')  
+    return dict(categories=categories)
 
 def get_social_links(request):
     social_links = SocialLinks.objects.all()
