@@ -45,6 +45,65 @@
                 <section class="mb-5">
                     <p class="fs-5 mb-4">{{ single_blog.short_description }}</p>
                     <p class="fs-5 mb-4">{{ single_blog.blog_body }}</p>
+                    
+                    <!-- COMMENTS SECTION -->
+                    <div class="mt-5">
+                        <h4 class="mb-4">
+                            Comments ({{ comment_count }})
+                        </h4>
+
+                        {% if comments %}
+                            {% for comment in comments %}
+                            <div class="card mb-3 shadow-sm">
+                                <div class="card-body">
+
+                                    <div class="d-flex align-items-center mb-2">
+                                        <!-- Avatar -->
+                                        <div class="rounded-circle bg-warning text-white 
+                                                    d-flex align-items-center justify-content-center 
+                                                    fw-bold me-3"
+                                            style="width:40px; height:40px;">
+                                            {{ comment.user.username|slice:":1" }}
+                                        </div>
+                                        &nbsp;
+                                        <!-- User info -->
+                                        <div>
+                                            <h6 class="mb-0">{{ comment.user.username }}</h6>
+                                            <small class="text-muted">
+                                                {{ comment.created_at| timesince }} ago
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Comment text -->
+                                    <p class="mb-0 ms-5">
+                                        {{ comment.comment }}
+                                    </p>
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="alert alert-light border text-center">
+                                No comments yet. Be the first to comment 💬
+                            </div>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        {% if user.is_authenticated %}
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <textarea name="comment" class="form-control" placeholder="Write your comment "></textarea>
+                                <input type="submit" value="submit" class="btn btn-primary mt-2">
+                            </div>
+                        </form>
+                        {% else %}
+                        <h4>Please <span><a href="{% url 'login' %}">login</a></span>  to write a comment</h4>
+                        {% endif %}
+                    </div>
+
                     </section>
             </article>
         </div>
